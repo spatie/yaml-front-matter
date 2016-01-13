@@ -47,8 +47,8 @@ $object = $parser->parse(file_get_contents('example.md'));
 The parser will return a `YamlFrontMatterObject`, which can be queried for front matter or it's body.
 
 ```php
-$object->matter(); // => ['title' => 'Example'];
-$object->matter('title'); // => 'Example';
+$object->matter(); // => ['title' => 'Example']
+$object->matter('title'); // => 'Example'
 $object->body(); // => 'Lorem ipsum.'
 ```
 
