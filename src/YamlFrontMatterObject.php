@@ -6,10 +6,7 @@ use Illuminate\Support\Arr;
 
 class YamlFrontMatterObject
 {
-    /** @var array */
     protected $matter;
-
-    /** @var string */
     protected $body;
 
     public function __construct(array $matter, string $body)

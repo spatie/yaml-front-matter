@@ -7,6 +7,13 @@ use Symfony\Component\Yaml\Yaml;
 
 class YamlFrontMatterParser
 {
+    protected $yamlParser;
+
+    public function __construct()
+    {
+        $this->yamlParser = new Yaml();
+    }
+
     public function parse(string $content) : YamlFrontMatterObject
     {
         // Parser regex borrowed from the `devster/frontmatter` package
@@ -25,16 +32,9 @@ class YamlFrontMatterParser
             return new YamlFrontMatterObject([], $content);
         }
 
-        $matter = $this->parseYaml($parts[1]);
+        $matter = $this->yamlParser->parse($parts[1]);
         $body = $parts[2];
 
         return new YamlFrontMatterObject($matter, $body);
-    }
-
-    protected function parseYaml(string $data) : array
-    {
-        $yaml = new Yaml();
-        
-        return $yaml->parse($data);
     }
 }
