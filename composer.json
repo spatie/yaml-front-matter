@@ -1,0 +1,41 @@
+{
+    "name": "spatie/yaml-front-matter",
+    "description": "A to the point yaml front matter parser",
+    "keywords": [
+        "spatie",
+        "yaml",
+        "front matter",
+        "jekyll"
+    ],
+    "homepage": "https://github.com/sebastiandedeyne/yaml-front-matter",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sebastian De Deyne",
+            "email": "sebastian@spatie.be",
+            "homepage": "https://spatie.be",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php" : ">=7.0",
+        "illuminate/support": "5.*",
+        "symfony/yaml": "^3.0"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^2.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Spatie\\YamlFrontMatter\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "spec\\Spatie\\YamlFrontMatter\\": "spec"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    }
+}
