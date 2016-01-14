@@ -5,7 +5,7 @@ namespace Spatie\YamlFrontMatter;
 use Exception;
 use Symfony\Component\Yaml\Yaml;
 
-class YamlFrontMatterParser
+class Parser
 {
     protected $yamlParser;
 
@@ -14,7 +14,7 @@ class YamlFrontMatterParser
         $this->yamlParser = new Yaml();
     }
 
-    public function parse(string $content) : YamlFrontMatterObject
+    public function parse(string $content) : Document
     {
         // Parser regex borrowed from the `devster/frontmatter` package
         // https://github.com/devster/frontmatter/blob/bb5d2c7/src/Parser.php#L123
@@ -29,12 +29,12 @@ class YamlFrontMatterParser
         }
 
         if ($match === 0) {
-            return new YamlFrontMatterObject([], $content);
+            return new Document([], $content);
         }
 
         $matter = $this->yamlParser->parse($parts[1]);
         $body = $parts[2];
 
-        return new YamlFrontMatterObject($matter, $body);
+        return new Document($matter, $body);
     }
 }

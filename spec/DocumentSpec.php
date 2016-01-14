@@ -3,9 +3,9 @@
 namespace spec\Spatie\YamlFrontMatter;
 
 use PhpSpec\ObjectBehavior;
-use Spatie\YamlFrontMatter\YamlFrontMatterObject;
+use Spatie\YamlFrontMatter\Document;
 
-class YamlFrontMatterObjectSpec extends ObjectBehavior
+class DocumentSpec extends ObjectBehavior
 {
     public function let()
     {
@@ -20,7 +20,7 @@ class YamlFrontMatterObjectSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType(YamlFrontMatterObject::class);
+        $this->shouldHaveType(Document::class);
     }
 
     public function it_returns_all_front_matter()

@@ -4,7 +4,7 @@ namespace Spatie\YamlFrontMatter;
 
 use Illuminate\Support\Arr;
 
-class YamlFrontMatterObject
+class Document
 {
     protected $matter;
     protected $body;
