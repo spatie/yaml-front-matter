@@ -41,20 +41,20 @@ Consider the `example.md` file from above. First you'll need to parse the conten
 ```php
 $parser = new \Spatie\YamlFrontMatter\YamlFrontMatterParser();
 
-$object = $parser->parse(file_get_contents(__DIR__'/example.md'));
+$object = $parser->parse(file_get_contents('example.md'));
 ```
 
 The parser will return a `YamlFrontMatterObject`, which can be queried for front matter or it's body.
 
 ```php
-$object->matter(); // => ['title' => 'Example'];
-$object->matter('title'); // => 'Example';
+$object->matter(); // => ['title' => 'Example']
+$object->matter('title'); // => 'Example'
 $object->body(); // => 'Lorem ipsum.'
 ```
 
 **Protip**: The `matter` function also accepts dot notation for nested fields, e.g. `matter('meta.keywords')`.
 
-## Change log
+## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
 
