@@ -21,10 +21,10 @@ class Parser
 
         $parts = preg_split($pattern, PHP_EOL . ltrim($content));
 
-        if (count($parts) === 1) {
+        if (count($parts) < 3) {
             return new Document([], $content);
         }
-        $matter = $this->yamlParser->parse($parts[1]);
+        $matter = $this->yamlParser->parse(trim($parts[1]));
         $body = implode(PHP_EOL . "---" . PHP_EOL, array_slice($parts, 2));
         return new Document($matter, $body);
     }
