@@ -47,7 +47,7 @@ $ composer require spatie/yaml-front-matter
 Consider the `example.md` file from above. First you'll need to parse the contents:
 
 ```php
-$parser = new \Spatie\YamlFrontMatter\YamlFrontMatterParser();
+$parser = new \Spatie\YamlFrontMatter\Parser();
 
 $object = $parser->parse(file_get_contents('example.md'));
 ```
