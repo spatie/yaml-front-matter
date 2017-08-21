@@ -3,7 +3,7 @@
 All Notable changes to `yaml-front-matter` will be documented in this file
 
 ## 2.0.0 - 2017-08-21
-- Renamed `Parser` class to `FrontMatter`
+- Renamed `Parser` class to `YamlFrontMatter`
 - `parse` and `parseFile` are now static methods
 - `Document` now has a `__get` implementation for retrieving front matter
 

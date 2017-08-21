@@ -18,10 +18,14 @@ Lorem ipsum.
 ```
 
 ```php
-$object = $parser->parse(file_get_contents(__DIR__'/example.md'));
+$object = YamlFrontMatter::parse(file_get_contents(__DIR__'/example.md'));
 
 $object->matter('title'); // => 'Example';
 $object->body(); // => 'Lorem ipsum.'
+
+// Or retrieve front matter with a property call...
+
+$object->title; // => 'Example';
 ```
 
 Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
@@ -47,9 +51,7 @@ $ composer require spatie/yaml-front-matter
 Consider the `example.md` file from above. First you'll need to parse the contents:
 
 ```php
-$parser = new \Spatie\YamlFrontMatter\Parser();
-
-$object = $parser->parse(file_get_contents('example.md'));
+$object = YamlFrontMatter::parse(file_get_contents('example.md'));
 ```
 
 The parser will return a `YamlFrontMatterObject`, which can be queried for front matter or it's body.
@@ -58,6 +60,7 @@ The parser will return a `YamlFrontMatterObject`, which can be queried for front
 $object->matter(); // => ['title' => 'Example']
 $object->matter('title'); // => 'Example'
 $object->body(); // => 'Lorem ipsum.'
+$object->title; // => 'Example'
 ```
 
 **Protip**: The `matter` function also accepts dot notation for nested fields, e.g. `matter('meta.keywords')`.
@@ -86,6 +89,7 @@ If you discover any security related issues, please email freek@spatie.be instea
 - [All Contributors](../../contributors)
 
 ## About Spatie
+
 Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
 
 ## License
