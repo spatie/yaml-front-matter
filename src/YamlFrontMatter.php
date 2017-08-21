@@ -4,7 +4,7 @@ namespace Spatie\YamlFrontMatter;
 
 use Symfony\Component\Yaml\Yaml;
 
-class FrontMatter
+class YamlFrontMatter
 {
     public static function parse(string $content): Document
     {
