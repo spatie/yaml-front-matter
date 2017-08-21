@@ -4,17 +4,9 @@ namespace Spatie\YamlFrontMatter;
 
 use Symfony\Component\Yaml\Yaml;
 
-class Parser
+class FrontMatter
 {
-    /** @var \Symfony\Component\Yaml\Yaml */
-    protected $yamlParser;
-
-    public function __construct()
-    {
-        $this->yamlParser = new Yaml();
-    }
-
-    public function parse(string $content): Document
+    public static function parse(string $content): Document
     {
         $pattern = '/[\s\r\n]---[\s\r\n]/s';
 
@@ -24,16 +16,16 @@ class Parser
             return new Document([], $content);
         }
 
-        $matter = $this->yamlParser->parse(trim($parts[1]));
+        $matter = Yaml::parse(trim($parts[1]));
 
         $body = implode(PHP_EOL . "---" . PHP_EOL, array_slice($parts, 2));
 
         return new Document($matter, $body);
     }
 
-    public function parseFile(string $path): Document
+    public static function parseFile(string $path): Document
     {
-        return $this->parse(
+        return static::parse(
             file_get_contents($path)
         );
     }

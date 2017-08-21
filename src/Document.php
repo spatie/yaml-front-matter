@@ -28,4 +28,13 @@ class Document
     {
         return $this->body;
     }
+
+    public function __get($key)
+    {
+        if ($key === 'body') {
+            return $this->body;
+        }
+
+        return $this->matter($key);
+    }
 }
