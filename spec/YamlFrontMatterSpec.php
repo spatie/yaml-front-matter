@@ -4,13 +4,13 @@ namespace spec\Spatie\YamlFrontMatter;
 
 use PhpSpec\ObjectBehavior;
 use Spatie\YamlFrontMatter\Document;
-use Spatie\YamlFrontMatter\Parser;
+use Spatie\YamlFrontMatter\YamlFrontMatter;
 
-class ParserSpec extends ObjectBehavior
+class YamlFrontMatterSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType(Parser::class);
+        $this->shouldHaveType(YamlFrontMatter::class);
     }
 
     public function it_can_parse_valid_front_matter()
