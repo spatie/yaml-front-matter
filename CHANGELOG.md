@@ -2,6 +2,9 @@
 
 All Notable changes to `yaml-front-matter` will be documented in this file
 
+## 2.0.1 - 2017-09-04
+- Fix for documents with empty front matter
+
 ## 2.0.0 - 2017-08-21
 - Renamed `Parser` class to `YamlFrontMatter`
 - `parse` and `parseFile` are now static methods
