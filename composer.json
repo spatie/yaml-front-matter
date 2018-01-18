@@ -23,7 +23,7 @@
         "symfony/yaml": "^3.0|^4.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^2.4"
+        "phpunit/phpunit": "^6.5"
     },
     "autoload": {
         "psr-4": {
@@ -32,10 +32,10 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "spec\\Spatie\\YamlFrontMatter\\": "spec"
+            "Spatie\\YamlFrontMatter\\Tests\\": "tests"
         }
     },
     "scripts": {
-        "test": "vendor/bin/phpspec run"
+        "test": "vendor/bin/phpunit"
     }
 }

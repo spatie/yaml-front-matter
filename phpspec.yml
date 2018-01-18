@@ -1,5 +1,0 @@
-suites:
-    searchindex_suite:
-        namespace: Spatie\YamlFrontMatter
-        psr4_prefix: Spatie\YamlFrontMatter
-        src_path: src
