@@ -44,6 +44,18 @@ class YamlFrontMatterSpec extends ObjectBehavior
         $this->parse($contents)->shouldHaveBodyContaining('Lorem ipsum.');
     }
 
+    public function it_parses_contents_without_a_body()
+    {
+        $contents = "
+        ---
+        foo: bar
+        ---
+        ";
+
+        $this->parse($contents)->shouldHaveType(Document::class);
+        $this->parse($contents)->shouldHaveFrontMatter(['foo' => 'bar']);
+    }
+
     public function getMatchers() : array
     {
         return [
