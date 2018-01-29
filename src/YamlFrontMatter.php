@@ -18,7 +18,7 @@ class YamlFrontMatter
 
         $matter = Yaml::parse(trim($parts[1]));
 
-        $body = implode(PHP_EOL . "---" . PHP_EOL, array_slice($parts, 2));
+        $body = implode(PHP_EOL . '---' . PHP_EOL, array_slice($parts, 2));
 
         return new Document($matter, $body);
     }
