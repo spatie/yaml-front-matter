@@ -9,9 +9,10 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 class YamlFrontMatterTest extends TestCase
 {
     /**
+     * @test
      * @dataProvider documentProvider
      */
-    public function testParseFrontMatter($contents, $expectedMatter, $expectedBody)
+    public function it_can_parse_front_matter($contents, $expectedMatter, $expectedBody)
     {
         $document = YamlFrontMatter::parse($contents);
 
@@ -50,11 +51,18 @@ class YamlFrontMatterTest extends TestCase
                 "---\nfoo: bar\n---\n",
                 ['foo' => 'bar'],
                 []
+            ],
+            // No newline
+            [
+                "---\nfoo: bar\n---",
+                ['foo' => 'bar'],
+                []
             ]
         ];
     }
 
-    public function testParseFrontMatterFromFile()
+    /** @text */
+    public function it_can_parse_front_matter_from_a_file()
     {
         $document = YamlFrontMatter::parseFile(__DIR__.'/document.md');
 
