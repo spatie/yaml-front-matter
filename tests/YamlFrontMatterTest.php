@@ -19,6 +19,7 @@ class YamlFrontMatterTest extends TestCase
         $this->assertInstanceOf(Document::class, $document);
 
         $this->assertEquals($expectedMatter, $document->matter());
+
         foreach ($expectedBody as $str) {
             $this->assertContains($str, $document->body());
         }
