@@ -58,7 +58,13 @@ class YamlFrontMatterTest extends TestCase
                 "---\nfoo: bar\n---",
                 ['foo' => 'bar'],
                 []
-            ]
+            ],
+            // Delimiter in matter
+            [
+                "---\nfoo: ---bar\n---",
+                ['foo' => '---bar'],
+                []
+            ],
         ];
     }
 
