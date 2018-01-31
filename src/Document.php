@@ -9,7 +9,7 @@ class Document
     protected $matter;
     protected $body;
 
-    public function __construct($matter = [], string $body)
+    public function __construct($matter, string $body)
     {
         $this->matter = is_array($matter) ? $matter : [];
         $this->body = $body;

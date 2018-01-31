@@ -3,7 +3,6 @@
 namespace Spatie\YamlFrontMatter\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Spatie\YamlFrontMatter\Document;
 
 class DocumentTest extends TestCase
 {
@@ -14,7 +13,7 @@ class DocumentTest extends TestCase
         $this->document = new \Spatie\YamlFrontMatter\Document(
             [
                 'title' => 'Front Matter',
-                'meta' => ['date' => '01/02/1992']
+                'meta'  => ['date' => '01/02/1992'],
             ],
             'Hello world!'
         );
@@ -59,6 +58,6 @@ class DocumentTest extends TestCase
     /** @test */
     public function it_can_magically_get_specific_front_matter()
     {
-        $this->assertEquals("Front Matter", $this->document->title);
+        $this->assertEquals('Front Matter', $this->document->title);
     }
 }
