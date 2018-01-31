@@ -8,7 +8,7 @@ class YamlFrontMatter
 {
     public static function parse(string $content): Document
     {
-        $pattern = '/[\s\r\n]---[\s\r\n]/s';
+        $pattern = '/^[\s\r\n]?---[\s\r\n]?$/sm';
 
         $parts = preg_split($pattern, PHP_EOL . ltrim($content));
 
