@@ -36,7 +36,7 @@ class YamlFrontMatterTest extends TestCase
             [
                 "---\nfoo: bar\n---\n\nLorem ipsum.",
                 ['foo' => 'bar'],
-                ['Lorem ipsum.']
+                ['Lorem ipsum.'],
             ],
             // Invalid front matter
             [
@@ -44,26 +44,26 @@ class YamlFrontMatterTest extends TestCase
                 [],
                 [
                     'foo: bar',
-                    'Lorem ipsum.'
-                ]
+                    'Lorem ipsum.',
+                ],
             ],
             // Empty body
             [
                 "---\nfoo: bar\n---\n",
                 ['foo' => 'bar'],
-                []
+                [],
             ],
             // No newline
             [
                 "---\nfoo: bar\n---",
                 ['foo' => 'bar'],
-                []
+                [],
             ],
             // Delimiter in matter
             [
                 "---\nfoo: ---bar\n---",
                 ['foo' => '---bar'],
-                []
+                [],
             ],
         ];
     }
@@ -75,6 +75,6 @@ class YamlFrontMatterTest extends TestCase
 
         $this->assertInstanceOf(Document::class, $document);
         $this->assertEquals(['foo' => 'bar'], $document->matter());
-        $this->assertContains("Lorem ipsum.", $document->body());
+        $this->assertContains('Lorem ipsum.', $document->body());
     }
 }
