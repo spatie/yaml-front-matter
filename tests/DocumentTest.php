@@ -3,7 +3,6 @@
 namespace Spatie\YamlFrontMatter\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Spatie\YamlFrontMatter\Document;
 
 class DocumentTest extends TestCase
 {
@@ -14,13 +13,14 @@ class DocumentTest extends TestCase
         $this->document = new \Spatie\YamlFrontMatter\Document(
             [
                 'title' => 'Front Matter',
-                'meta' => ['date' => '01/02/1992']
+                'meta'  => ['date' => '01/02/1992'],
             ],
             'Hello world!'
         );
     }
 
-    public function testReturnsAllFrontMatter()
+    /** @test */
+    public function it_cant_return_all_front_matter()
     {
         $matter = $this->document->matter();
 
@@ -31,28 +31,33 @@ class DocumentTest extends TestCase
         $this->assertEquals(['date' => '01/02/1992'], $matter['meta']);
     }
 
-    public function testReturnSpecificFrontMatter()
+    /** @test */
+    public function it_can_return_specific_front_matter()
     {
         $this->assertEquals('Front Matter', $this->document->matter('title'));
     }
 
-    public function testReturnsNestedSpecificFrontMatter()
+    /** @test */
+    public function it_can_return_nested_front_matter()
     {
         $this->assertEquals('01/02/1992', $this->document->matter('meta.date'));
     }
 
-    public function testReturnsDefaultFrontMatterValue()
+    /** @test */
+    public function it_can_return_a_default_front_matter_value()
     {
         $this->assertEquals('technology', $this->document->matter('keywords', 'technology'));
     }
 
-    public function testReturnsBody()
+    /** @test */
+    public function it_can_return_the_body()
     {
         $this->assertEquals('Hello world!', $this->document->body());
     }
 
-    public function testMagicallyGetSpecificFrontMatter()
+    /** @test */
+    public function it_can_magically_get_specific_front_matter()
     {
-        $this->assertEquals("Front Matter", $this->document->title);
+        $this->assertEquals('Front Matter', $this->document->title);
     }
 }

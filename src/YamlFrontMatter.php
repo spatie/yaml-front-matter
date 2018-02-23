@@ -8,9 +8,9 @@ class YamlFrontMatter
 {
     public static function parse(string $content): Document
     {
-        $pattern = '/[\s\r\n]---[\s\r\n]/s';
+        $pattern = '/^[\s\r\n]?---[\s\r\n]?$/sm';
 
-        $parts = preg_split($pattern, PHP_EOL . ltrim($content));
+        $parts = preg_split($pattern, PHP_EOL.ltrim($content));
 
         if (count($parts) < 3) {
             return new Document([], $content);
@@ -18,7 +18,7 @@ class YamlFrontMatter
 
         $matter = Yaml::parse(trim($parts[1]));
 
-        $body = implode(PHP_EOL . "---" . PHP_EOL, array_slice($parts, 2));
+        $body = implode(PHP_EOL.'---'.PHP_EOL, array_slice($parts, 2));
 
         return new Document($matter, $body);
     }
