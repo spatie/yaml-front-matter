@@ -2,6 +2,9 @@
 
 All Notable changes to `yaml-front-matter` will be documented in this file
 
+## 2.0.2 - 2018-02-23
+- Fix for documents with no newline after front matter
+
 ## 2.0.1 - 2017-09-04
 - Fix for documents with empty front matter
 
