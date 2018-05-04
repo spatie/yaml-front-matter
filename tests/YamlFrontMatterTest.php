@@ -68,7 +68,7 @@ class YamlFrontMatterTest extends TestCase
         ];
     }
 
-    /** @text */
+    /** @test */
     public function it_can_parse_front_matter_from_a_file()
     {
         $document = YamlFrontMatter::parseFile(__DIR__.'/document.md');
