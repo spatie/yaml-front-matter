@@ -64,7 +64,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recen
 ## Testing
 
 ``` bash
-$ vendor/bin/phpspec run
+$ vendor/bin/phpunit
 ```
 
 ## Contributing
