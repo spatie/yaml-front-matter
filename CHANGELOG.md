@@ -2,6 +2,9 @@
 
 All Notable changes to `yaml-front-matter` will be documented in this file
 
+## 2.0.4 - 2019-09-12
+- Remove `illuminate/support` dependency
+
 ## 2.0.3 - 2019-09-04
 - Allow `illuminate/support:^6.0`
 
