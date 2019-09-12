@@ -2,8 +2,6 @@
 
 namespace Spatie\YamlFrontMatter;
 
-use Illuminate\Support\Arr;
-
 class Document
 {
     protected $matter;
