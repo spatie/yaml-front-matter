@@ -2,6 +2,9 @@
 
 All Notable changes to `yaml-front-matter` will be documented in this file
 
+## 2.0.5 - 2019-12-02
+- Allow Symfony 5 (#20)
+
 ## 2.0.4 - 2019-09-12
 - Remove `illuminate/support` dependency
 
