@@ -3,7 +3,6 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/yaml-front-matter.svg?style=flat-square)](https://packagist.org/packages/spatie/yaml-front-matter)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Build Status](https://img.shields.io/travis/spatie/yaml-front-matter/master.svg?style=flat-square)](https://travis-ci.org/spatie/yaml-front-matter)
-[![SensioLabsInsight](https://img.shields.io/sensiolabs/i/e8934dc2-3075-40a4-a2e9-10bc24cc7101.svg?style=flat-square)](https://insight.sensiolabs.com/projects/e8934dc2-3075-40a4-a2e9-10bc24cc7101)
 [![Quality Score](https://img.shields.io/scrutinizer/g/spatie/yaml-front-matter.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/yaml-front-matter)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/yaml-front-matter.svg?style=flat-square)](https://packagist.org/packages/spatie/yaml-front-matter)
 
