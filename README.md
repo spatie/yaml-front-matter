@@ -17,7 +17,7 @@ Lorem ipsum.
 ```
 
 ```php
-$object = YamlFrontMatter::parse(file_get_contents(__DIR__'/example.md'));
+$object = YamlFrontMatter::parse(file_get_contents(__DIR__.'/example.md'));
 
 $object->matter('title'); // => 'Example';
 $object->body(); // => 'Lorem ipsum.'
