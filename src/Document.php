@@ -22,7 +22,7 @@ class Document
         return $this->matter;
     }
 
-    public function body() : string
+    public function body(): string
     {
         return $this->body;
     }
