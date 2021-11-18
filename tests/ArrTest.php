@@ -10,12 +10,12 @@ class ArrTest extends TestCase
 {
     protected $testArray;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->testArray = [
             'title' => 'Front Matter',
-            'meta'  => ['date' => '01/02/1992'],
-            'body'  => 'Hello world!',
+            'meta' => ['date' => '01/02/1992'],
+            'body' => 'Hello world!',
         ];
     }
 

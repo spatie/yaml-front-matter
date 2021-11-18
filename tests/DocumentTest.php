@@ -8,12 +8,12 @@ class DocumentTest extends TestCase
 {
     protected $document;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->document = new \Spatie\YamlFrontMatter\Document(
             [
                 'title' => 'Front Matter',
-                'meta'  => ['date' => '01/02/1992'],
+                'meta' => ['date' => '01/02/1992'],
             ],
             'Hello world!'
         );

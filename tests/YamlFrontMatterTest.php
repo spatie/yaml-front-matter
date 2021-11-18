@@ -21,7 +21,7 @@ class YamlFrontMatterTest extends TestCase
         $this->assertEquals($expectedMatter, $document->matter());
 
         foreach ($expectedBody as $str) {
-            $this->assertContains($str, $document->body());
+            $this->assertStringContainsString($str, $document->body());
         }
 
         if (empty($expectedBody)) {
@@ -75,6 +75,6 @@ class YamlFrontMatterTest extends TestCase
 
         $this->assertInstanceOf(Document::class, $document);
         $this->assertEquals(['foo' => 'bar'], $document->matter());
-        $this->assertContains('Lorem ipsum.', $document->body());
+        $this->assertStringContainsString('Lorem ipsum.', $document->body());
     }
 }
