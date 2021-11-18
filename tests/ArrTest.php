@@ -14,8 +14,8 @@ class ArrTest extends TestCase
     {
         $this->testArray = [
             'title' => 'Front Matter',
-            'meta'  => ['date' => '01/02/1992'],
-            'body'  => 'Hello world!',
+            'meta' => ['date' => '01/02/1992'],
+            'body' => 'Hello world!',
         ];
     }
 

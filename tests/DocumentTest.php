@@ -13,7 +13,7 @@ class DocumentTest extends TestCase
         $this->document = new \Spatie\YamlFrontMatter\Document(
             [
                 'title' => 'Front Matter',
-                'meta'  => ['date' => '01/02/1992'],
+                'meta' => ['date' => '01/02/1992'],
             ],
             'Hello world!'
         );
