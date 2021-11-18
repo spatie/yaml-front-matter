@@ -10,7 +10,7 @@ class ArrTest extends TestCase
 {
     protected $testArray;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->testArray = [
             'title' => 'Front Matter',

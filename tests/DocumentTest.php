@@ -8,7 +8,7 @@ class DocumentTest extends TestCase
 {
     protected $document;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->document = new \Spatie\YamlFrontMatter\Document(
             [
