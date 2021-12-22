@@ -2,6 +2,10 @@
 
 All Notable changes to `yaml-front-matter` will be documented in this file
 
+## 2.0.6 - 2021-12-22
+
+- Support Symfony 6
+
 ## 2.0.5 - 2019-12-02
 - Allow Symfony 5 (#20)
 
