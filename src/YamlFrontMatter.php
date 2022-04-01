@@ -26,39 +26,73 @@ class YamlFrontMatter
     /**
      * A parser that can handle Markdown that contains Markdown.
      *
+     * Attempts to follow the practices defined in https://jekyllrb.com/docs/front-matter/.
+     *
      * Fixes https://github.com/spatie/yaml-front-matter/discussions/30.
-     * Original code by https://github.com/eklausme
      *
      * @param string $content
      * @return Document
      */
     public static function markdownCompatibleParse(string $content): Document
     {
-        $n3dash = 0;    // count number of triple dashes
-        $pos1 = 0;
-        $pos2 = 0;
-        $len = strlen($content);
+        // Turn the string into an array of lines, making the code easier to understand
+        $lines = explode("\n", $content);
 
-        for ($pos = 0; ; $pos += 3) {
-            $pos = strpos($content, '---', $pos);
-            if ($pos === false) return new Document([], $content);   // no pair of triple dashes at all
-            // Are we at end or is next character white space?
-            if ($pos + 3 == $len || ctype_space(substr($content, $pos + 3, 1))) {
-                if ($n3dash == 0 && ($pos == 0 || $pos > 0 && substr($content, $pos - 1, 1) == "\n")) {
-                    $n3dash = 1;    // found first triple dash
-                    $pos1 = $pos + 3;
-                } else if ($n3dash == 1 && substr($content, $pos - 1, 1) == "\n") {
-                    // found 2nd properly enclosed triple dash
-                    $n3dash = 2;
-                    $pos2 = $pos + 3;
+        // Find the line numbers of the front matter start and end blocks
+        $frontMatterControlBlockIndex = [];
+        foreach ($lines as $lineNumber => $lineContents) {
+            // If the line starts with three dashes, it's a front matter control block
+            if (substr($lineContents, 0, 3) === '---') {
+                // The line contains the front matter control block
+                if (sizeof($frontMatterControlBlockIndex) === 0) {
+                    // This is the first control block
+                    $frontMatterControlBlockIndex['start'] = $lineNumber;
+                } elseif (sizeof($frontMatterControlBlockIndex) === 1) {
+                    // This is the second control block
+                    $frontMatterControlBlockIndex['end'] = $lineNumber;
+                    // We can now break the loop because we found the end of the actual front matter
                     break;
                 }
             }
         }
-        $matter = substr($content, $pos1, $pos2 - 3 - $pos1);
-        $body = substr($content, $pos2);
+
+        // If there are no front matter blocks, we just return the content as is
+        if (sizeof($frontMatterControlBlockIndex) < 2) {
+            return new Document([], $content);
+        }
+
+        // Construct the new line arrays
+        $matter = [];
+        $body = [];
+
+        // Loop through the original line array
+        foreach ($lines as $lineNumber => $lineContents) {
+            // Compare the line number to the one of the closing front matter block
+            // to determine if we're in the front matter or the body
+            if ($lineNumber <= $frontMatterControlBlockIndex['end']) {
+                $matter[] = $lineContents;
+            } else {
+                $body[] = $lineContents;
+            }
+        }
+
+        // Remove the dashes
+        unset($matter[$frontMatterControlBlockIndex['start']]);
+        unset($matter[$frontMatterControlBlockIndex['end']]);
+
+        // If the first line of the body is empty, remove it
+        if (trim($body[0]) === '') {
+            unset($body[0]);
+        }
+
+        // Convert the lines back into strings
+        $matter = implode("\n", $matter);
+        $body = implode("\n", $body);
+        
+        // Parse the front matter
         $matter = Yaml::parse($matter);
 
+        // Return the document
         return new Document($matter, $body);
     }
 
