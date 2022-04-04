@@ -23,7 +23,8 @@ class ComplexMarkdownParser
     protected $content;
 
     /**
-     * The document string as an array of lines
+     * The document string as an array of lines,
+     * making it easier to understand and work with.
      * @var array
      */
     protected $lines;
@@ -43,7 +44,6 @@ class ComplexMarkdownParser
     public function __construct(string $content)
     {
         $this->content = $content;
-        // Turn the string into an array of lines, making the code easier to understand
         $this->lines = explode("\n", $this->content);
     }
 
@@ -53,46 +53,17 @@ class ComplexMarkdownParser
      */
     public function parse(): Document
     {
-        // Find the line numbers of the front matter start and end blocks
         $this->findFrontMatterStartAndEndLineNumbers();
 
-        // If there are no front matter blocks, we just return the content as is
         if (!$this->hasFrontMatter()) {
             return new Document([], $this->content);
         }
 
-        // Construct the new line arrays
-        $matter = [];
-        $body = [];
+        $matter = $this->getFrontMatter();
+        $body = $this->getBody();
 
-        // Loop through the original line array
-        foreach ($this->lines as $lineNumber => $lineContents) {
-            // Compare the line number to the one of the closing front matter block
-            // to determine if we're in the front matter or the body
-            if ($lineNumber <= $this->frontMatterEndLine) {
-                $matter[] = $lineContents;
-            } else {
-                $body[] = $lineContents;
-            }
-        }
-
-        // Remove the dashes
-        unset($matter[$this->frontMatterStartLine]);
-        unset($matter[$this->frontMatterEndLine]);
-
-        // If the first line of the body is empty, remove it
-        if (trim($body[0]) === '') {
-            unset($body[0]);
-        }
-
-        // Convert the lines back into strings
-        $matter = implode("\n", $matter);
-        $body = implode("\n", $body);
-
-        // Parse the front matter
         $matter = Yaml::parse($matter);
 
-        // Return the document
         return new Document($matter, $body);
     }
 
@@ -100,13 +71,43 @@ class ComplexMarkdownParser
      * Is a given line a front matter control block?
      *
      * A control block is a line that starts with three dashes.
-     *
      * @param string $line
      * @return bool
      */
     private function isFrontMatterControlBlock(string $line): bool
     {
         return substr($line, 0, 3) === '---';
+    }
+
+
+    /**
+     * Find the line numbers of the front matter start and end blocks.
+     */
+    private function findFrontMatterStartAndEndLineNumbers()
+    {
+        foreach ($this->lines as $lineNumber => $lineContents) {
+            if ($this->isFrontMatterControlBlock($lineContents)) {
+                $this->setFrontMatterLineNumber($lineNumber);
+            }
+        }
+    }
+
+    /**
+     * Find and set the line numbers of the front matter start and end blocks.
+     *
+     * Ignores any additional front matter blocks found later in the document.
+     * @param $lineNumber
+     * @return void
+     */
+    private function setFrontMatterLineNumber($lineNumber)
+    {
+        if (!isset($this->frontMatterStartLine)) {
+            $this->frontMatterStartLine = $lineNumber;
+            return;
+        }
+        if (!isset($this->frontMatterEndLine)) {
+            $this->frontMatterEndLine = $lineNumber;
+        }
     }
 
     /**
@@ -118,22 +119,53 @@ class ComplexMarkdownParser
         return $this->frontMatterStartLine !== null && $this->frontMatterEndLine !== null;
     }
 
-    private function findFrontMatterStartAndEndLineNumbers()
+    /**
+     * Get the front matter from the document.
+     *
+     * Works by collecting all the lines before the end block,
+     * while skipping over the actual control blocks.
+     * @return string
+     */
+    private function getFrontMatter(): string
     {
+        $matter = [];
         foreach ($this->lines as $lineNumber => $lineContents) {
-            // If the line starts with three dashes, it's a front matter control block
-            if ($this->isFrontMatterControlBlock($lineContents)) {
-                // The line contains the front matter control block
-                if (!isset($this->frontMatterStartLine)) {
-                    // This is the first control block
-                    $this->frontMatterStartLine = $lineNumber;
-                } elseif (!isset($this->frontMatterEndLine)) {
-                    // This is the second control block
-                    $this->frontMatterEndLine = $lineNumber;
-                    // We can now break the loop because we found the end of the actual front matter
-                    break;
+            if ($lineNumber <= $this->frontMatterEndLine) {
+                if (!$this->isFrontMatterControlBlock($lineContents)) {
+                    $matter[] = $lineContents;
                 }
             }
         }
+        return implode("\n", $matter);
+    }
+
+    /**
+     * Get the body of the document.
+     *
+     * Works by collecting all the lines after the end block.
+     * @return string
+     */
+    private function getBody(): string
+    {
+        $body = [];
+        foreach ($this->lines as $lineNumber => $lineContents) {
+            if ($lineNumber > $this->frontMatterEndLine) {
+                $body[] = $lineContents;
+            }
+        }
+        return implode("\n", $this->trimBody($body));
+    }
+
+    /**
+     * If the first line of the body is empty, remove it
+     * @param array $body
+     * @return array
+     */
+    private function trimBody(array $body): array
+    {
+        if (trim($body[0]) === '') {
+            unset($body[0]);
+        }
+        return $body;
     }
 }
