@@ -8,16 +8,11 @@ use Symfony\Component\Yaml\Yaml;
  * A parser that can handle Markdown that contains Markdown.
  *
  * Attempts to follow the practices defined in https://jekyllrb.com/docs/front-matter/.
- *
- * Fixes https://github.com/spatie/yaml-front-matter/discussions/30.
- *
- * @param string $content
- * @return Document
  */
 class ComplexMarkdownParser
 {
     /**
-     * The Markdown content
+     * The Markdown content.
      * @var string
      */
     protected $content;
@@ -30,17 +25,21 @@ class ComplexMarkdownParser
     protected $lines;
 
     /**
-     * The line number of the starting front matter control block
+     * The line number of the starting front matter control block.
      * @var int|null
      */
     public $frontMatterStartLine;
 
     /**
-     * The line number of the ending front matter control block
+     * The line number of the ending front matter control block.
      * @var int|null
      */
     public $frontMatterEndLine;
 
+    /**
+     * Construct the parser.
+     * @param string $content The Markdown content to parse.
+     */
     public function __construct(string $content)
     {
         $this->content = $content;
@@ -48,7 +47,7 @@ class ComplexMarkdownParser
     }
 
     /**
-     * A parser that can handle Markdown that contains Markdown.
+     * Parse the Markdown content.
      * @return Document
      */
     public function parse(): Document
@@ -79,9 +78,8 @@ class ComplexMarkdownParser
         return substr($line, 0, 3) === '---';
     }
 
-
     /**
-     * Find the line numbers of the front matter start and end blocks.
+     * Find and set the line numbers of the front matter start and end blocks.
      */
     private function findFrontMatterStartAndEndLineNumbers()
     {
@@ -93,13 +91,12 @@ class ComplexMarkdownParser
     }
 
     /**
-     * Find and set the line numbers of the front matter start and end blocks.
+     * Set the appropriate line number for the front matter start or end block.
      *
-     * Ignores any additional front matter blocks found later in the document.
-     * @param $lineNumber
+     * @param $lineNumber int the current line number of the search.
      * @return void
      */
-    private function setFrontMatterLineNumber($lineNumber)
+    private function setFrontMatterLineNumber(int $lineNumber)
     {
         if (!isset($this->frontMatterStartLine)) {
             $this->frontMatterStartLine = $lineNumber;
@@ -116,7 +113,7 @@ class ComplexMarkdownParser
      */
     private function hasFrontMatter(): bool
     {
-        return $this->frontMatterStartLine !== null && $this->frontMatterEndLine !== null;
+        return ($this->frontMatterStartLine !== null) && ($this->frontMatterEndLine !== null);
     }
 
     /**
@@ -157,7 +154,7 @@ class ComplexMarkdownParser
     }
 
     /**
-     * If the first line of the body is empty, remove it
+     * If the first line of the body is empty, remove it.
      * @param array $body
      * @return array
      */
