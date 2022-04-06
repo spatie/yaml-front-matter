@@ -31,7 +31,7 @@ class YamlFrontMatterMarkdownCompatibleParseTest extends TestCase
         $this->assertEquals(['foo' => 'bar'], $document->matter());
         $this->assertStringContainsString('Lorem ipsum.', $document->body());
     }
-    
+
     /** @test */
     public function it_separates_the_front_matter_from_the_body()
     {
@@ -46,13 +46,13 @@ class YamlFrontMatterMarkdownCompatibleParseTest extends TestCase
         // This implicitly asserts that the body does not contain any front matter remnants
         $this->assertEquals('Lorem ipsum.', $document->body());
     }
-       
+
     /** @test */
     public function it_leaves_string_without_front_matter_intact()
     {
         $document = YamlFrontMatter::markdownCompatibleParse(
             "Lorem ipsum."
-        ); 
+        );
 
         $this->assertInstanceOf(Document::class, $document);
         $this->assertEmpty($document->matter());
@@ -72,5 +72,29 @@ class YamlFrontMatterMarkdownCompatibleParseTest extends TestCase
         $this->assertInstanceOf(Document::class, $document);
         $this->assertEmpty($document->matter());
         $this->assertEquals("---\ntitle: Front Matter\n\nLorem ipsum.", $document->body());
+    }
+
+    /** @test */
+    public function it_can_parse_a_string_with_unix_line_endings()
+    {
+        $document = YamlFrontMatter::markdownCompatibleParse(
+           "---\nfoo: bar\n---\n\nLorem ipsum."
+        );
+
+        $this->assertInstanceOf(Document::class, $document);
+        $this->assertEquals(['foo' => 'bar'], $document->matter());
+        $this->assertStringContainsString('Lorem ipsum.', $document->body());
+    }
+
+    /** @test */
+    public function it_can_parse_a_string_with_windows_line_endings()
+    {
+        $document = YamlFrontMatter::markdownCompatibleParse(
+           "---\r\nfoo: bar\r\n---\r\n\r\nLorem ipsum."
+        );
+
+        $this->assertInstanceOf(Document::class, $document);
+        $this->assertEquals(['foo' => 'bar'], $document->matter());
+        $this->assertStringContainsString('Lorem ipsum.', $document->body());
     }
 }
