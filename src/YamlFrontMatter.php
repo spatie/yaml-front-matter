@@ -23,6 +23,14 @@ class YamlFrontMatter
         return new Document($matter, $body);
     }
 
+    /**
+     * A parser that can handle Markdown that contains Markdown.
+     */
+    public static function markdownCompatibleParse(string $content): Document
+    {
+        return (new ComplexMarkdownParser($content))->parse();
+    }
+
     public static function parseFile(string $path): Document
     {
         return static::parse(
