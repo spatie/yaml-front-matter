@@ -34,11 +34,6 @@ class ComplexMarkdownParser
         return new Document($matter, $body);
     }
 
-    protected function isFrontMatterControlBlock(string $line): bool
-    {
-        return substr($line, 0, 3) === '---';
-    }
-
     protected function findFrontMatterStartAndEndLineNumbers()
     {
         foreach ($this->lines as $lineNumber => $lineContents) {
@@ -54,16 +49,11 @@ class ComplexMarkdownParser
             $this->frontMatterStartLine = $lineNumber;
             return;
         }
+        
         if (!isset($this->frontMatterEndLine)) {
             $this->frontMatterEndLine = $lineNumber;
         }
     }
-
-    protected function hasFrontMatter(): bool
-    {
-        return ($this->frontMatterStartLine !== null) && ($this->frontMatterEndLine !== null);
-    }
-
 
     protected function getFrontMatter(): string
     {
@@ -96,4 +86,15 @@ class ComplexMarkdownParser
         }
         return $body;
     }
+
+    protected function hasFrontMatter(): bool
+    {
+        return ($this->frontMatterStartLine !== null) && ($this->frontMatterEndLine !== null);
+    }
+
+    protected function isFrontMatterControlBlock(string $line): bool
+    {
+        return substr($line, 0, 3) === '---';
+    }
+
 }
