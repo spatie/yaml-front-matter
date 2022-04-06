@@ -18,7 +18,6 @@ class ComplexMarkdownParser
         $this->lines = explode("\n", $this->content);
     }
 
-   
     public function parse(): Document
     {
         $this->findFrontMatterStartAndEndLineNumbers();
@@ -35,12 +34,12 @@ class ComplexMarkdownParser
         return new Document($matter, $body);
     }
 
-    private function isFrontMatterControlBlock(string $line): bool
+    protected function isFrontMatterControlBlock(string $line): bool
     {
         return substr($line, 0, 3) === '---';
     }
 
-    private function findFrontMatterStartAndEndLineNumbers()
+    protected function findFrontMatterStartAndEndLineNumbers()
     {
         foreach ($this->lines as $lineNumber => $lineContents) {
             if ($this->isFrontMatterControlBlock($lineContents)) {
@@ -49,7 +48,7 @@ class ComplexMarkdownParser
         }
     }
 
-    private function setFrontMatterLineNumber(int $lineNumber)
+    protected function setFrontMatterLineNumber(int $lineNumber)
     {
         if (!isset($this->frontMatterStartLine)) {
             $this->frontMatterStartLine = $lineNumber;
@@ -60,13 +59,13 @@ class ComplexMarkdownParser
         }
     }
 
-    private function hasFrontMatter(): bool
+    protected function hasFrontMatter(): bool
     {
         return ($this->frontMatterStartLine !== null) && ($this->frontMatterEndLine !== null);
     }
 
-   
-    private function getFrontMatter(): string
+
+    protected function getFrontMatter(): string
     {
         $matter = [];
         foreach ($this->lines as $lineNumber => $lineContents) {
@@ -79,7 +78,7 @@ class ComplexMarkdownParser
         return implode("\n", $matter);
     }
 
-    private function getBody(): string
+    protected function getBody(): string
     {
         $body = [];
         foreach ($this->lines as $lineNumber => $lineContents) {
@@ -90,7 +89,7 @@ class ComplexMarkdownParser
         return implode("\n", $this->trimBody($body));
     }
 
-    private function trimBody(array $body): array
+    protected function trimBody(array $body): array
     {
         if (trim($body[0]) === '') {
             unset($body[0]);
