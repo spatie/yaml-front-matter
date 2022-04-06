@@ -2,9 +2,9 @@
 
 namespace Spatie\YamlFrontMatter\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Spatie\YamlFrontMatter\Document;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
-use PHPUnit\Framework\TestCase;
 
 class YamlFrontMatterMarkdownCompatibleParseTest extends TestCase
 {
@@ -36,7 +36,7 @@ class YamlFrontMatterMarkdownCompatibleParseTest extends TestCase
     public function it_separates_the_front_matter_from_the_body()
     {
         $document = YamlFrontMatter::markdownCompatibleParse(
-           "---\ntitle: Front Matter\n---\n\nLorem ipsum."
+            "---\ntitle: Front Matter\n---\n\nLorem ipsum."
         );
 
         $this->assertInstanceOf(Document::class, $document);
@@ -66,7 +66,7 @@ class YamlFrontMatterMarkdownCompatibleParseTest extends TestCase
         // and the document should be interpreted as having no front matter.
 
         $document = YamlFrontMatter::markdownCompatibleParse(
-           "---\ntitle: Front Matter\n\nLorem ipsum."
+            "---\ntitle: Front Matter\n\nLorem ipsum."
         );
 
         $this->assertInstanceOf(Document::class, $document);
@@ -78,7 +78,7 @@ class YamlFrontMatterMarkdownCompatibleParseTest extends TestCase
     public function it_can_parse_a_string_with_unix_line_endings()
     {
         $document = YamlFrontMatter::markdownCompatibleParse(
-           "---\nfoo: bar\n---\n\nLorem ipsum."
+            "---\nfoo: bar\n---\n\nLorem ipsum."
         );
 
         $this->assertInstanceOf(Document::class, $document);
@@ -90,7 +90,7 @@ class YamlFrontMatterMarkdownCompatibleParseTest extends TestCase
     public function it_can_parse_a_string_with_windows_line_endings()
     {
         $document = YamlFrontMatter::markdownCompatibleParse(
-           "---\r\nfoo: bar\r\n---\r\n\r\nLorem ipsum."
+            "---\r\nfoo: bar\r\n---\r\n\r\nLorem ipsum."
         );
 
         $this->assertInstanceOf(Document::class, $document);

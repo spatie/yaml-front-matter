@@ -22,7 +22,7 @@ class ComplexMarkdownParser
     {
         $this->findFrontMatterStartAndEndLineNumbers();
 
-        if (!$this->hasFrontMatter()) {
+        if (! $this->hasFrontMatter()) {
             return new Document([], $this->content);
         }
 
@@ -45,12 +45,13 @@ class ComplexMarkdownParser
 
     protected function setFrontMatterLineNumber(int $lineNumber)
     {
-        if (!isset($this->frontMatterStartLine)) {
+        if (! isset($this->frontMatterStartLine)) {
             $this->frontMatterStartLine = $lineNumber;
+
             return;
         }
 
-        if (!isset($this->frontMatterEndLine)) {
+        if (! isset($this->frontMatterEndLine)) {
             $this->frontMatterEndLine = $lineNumber;
         }
     }
@@ -60,11 +61,12 @@ class ComplexMarkdownParser
         $matter = [];
         foreach ($this->lines as $lineNumber => $lineContents) {
             if ($lineNumber <= $this->frontMatterEndLine) {
-                if (!$this->isFrontMatterControlBlock($lineContents)) {
+                if (! $this->isFrontMatterControlBlock($lineContents)) {
                     $matter[] = $lineContents;
                 }
             }
         }
+
         return implode("\n", $matter);
     }
 
@@ -76,6 +78,7 @@ class ComplexMarkdownParser
                 $body[] = $lineContents;
             }
         }
+
         return implode("\n", $this->trimBody($body));
     }
 
@@ -84,6 +87,7 @@ class ComplexMarkdownParser
         if (trim($body[0]) === '') {
             unset($body[0]);
         }
+
         return $body;
     }
 
