@@ -25,13 +25,6 @@ class YamlFrontMatter
 
     /**
      * A parser that can handle Markdown that contains Markdown.
-     *
-     * Attempts to follow the practices defined in https://jekyllrb.com/docs/front-matter/.
-     *
-     * Fixes https://github.com/spatie/yaml-front-matter/discussions/30.
-     *
-     * @param string $content
-     * @return Document
      */
     public static function markdownCompatibleParse(string $content): Document
     {

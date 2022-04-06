@@ -49,7 +49,7 @@ class ComplexMarkdownParser
             $this->frontMatterStartLine = $lineNumber;
             return;
         }
-        
+
         if (!isset($this->frontMatterEndLine)) {
             $this->frontMatterEndLine = $lineNumber;
         }
@@ -96,5 +96,4 @@ class ComplexMarkdownParser
     {
         return substr($line, 0, 3) === '---';
     }
-
 }
