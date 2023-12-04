@@ -2,6 +2,19 @@
 
 All Notable changes to `yaml-front-matter` will be documented in this file
 
+## 2.0.8 - 2023-12-04
+
+### What's Changed
+
+* Add PHP 8.2 Support by @patinthehat in https://github.com/spatie/yaml-front-matter/pull/39
+* Support Symfony 7 by @RobinDev in https://github.com/spatie/yaml-front-matter/pull/40
+
+### New Contributors
+
+* @RobinDev made their first contribution in https://github.com/spatie/yaml-front-matter/pull/40
+
+**Full Changelog**: https://github.com/spatie/yaml-front-matter/compare/2.0.7...2.0.8
+
 ## 2.0.7 - 2022-04-06
 
 ## What's Changed
