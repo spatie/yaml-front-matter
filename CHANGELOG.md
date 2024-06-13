@@ -2,6 +2,14 @@
 
 All Notable changes to `yaml-front-matter` will be documented in this file
 
+## 2.0.9 - 2024-06-13
+
+### What's Changed
+
+* Check if the array key is set before trying to trim it by @caendesilva in https://github.com/spatie/yaml-front-matter/pull/41
+
+**Full Changelog**: https://github.com/spatie/yaml-front-matter/compare/2.0.8...2.0.9
+
 ## 2.0.8 - 2023-12-04
 
 ### What's Changed
