@@ -84,7 +84,7 @@ class ComplexMarkdownParser
 
     protected function trimBody(array $body): array
     {
-        if (trim($body[0]) === '') {
+        if (isset($body[0]) && trim($body[0]) === '') {
             unset($body[0]);
         }
 

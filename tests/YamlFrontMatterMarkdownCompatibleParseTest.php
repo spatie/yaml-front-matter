@@ -51,7 +51,7 @@ class YamlFrontMatterMarkdownCompatibleParseTest extends TestCase
     public function it_leaves_string_without_front_matter_intact()
     {
         $document = YamlFrontMatter::markdownCompatibleParse(
-            "Lorem ipsum."
+            'Lorem ipsum.'
         );
 
         $this->assertInstanceOf(Document::class, $document);
@@ -96,5 +96,17 @@ class YamlFrontMatterMarkdownCompatibleParseTest extends TestCase
         $this->assertInstanceOf(Document::class, $document);
         $this->assertEquals(['foo' => 'bar'], $document->matter());
         $this->assertStringContainsString('Lorem ipsum.', $document->body());
+    }
+
+    /** @test */
+    public function it_can_parse_markdown_file_with_front_matter_and_no_markdown_body()
+    {
+        $document = YamlFrontMatter::markdownCompatibleParse(
+            "---\nfoo: bar\n---"
+        );
+
+        $this->assertInstanceOf(Document::class, $document);
+        $this->assertEquals(['foo' => 'bar'], $document->matter());
+        $this->assertEmpty($document->body());
     }
 }
