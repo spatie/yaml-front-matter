@@ -13,7 +13,7 @@ class Document
         $this->body = $body;
     }
 
-    public function matter(string $key = null, $default = null)
+    public function matter(?string $key = null, mixed $default = null)
     {
         if ($key) {
             return Arr::get($this->matter, $key, $default);
