@@ -2,6 +2,19 @@
 
 All Notable changes to `yaml-front-matter` will be documented in this file
 
+## 2.1.0 - 2024-12-02
+
+### What's Changed
+
+* PHP 8.4 support by @brendt in https://github.com/spatie/yaml-front-matter/pull/42
+* Drop PHP 7 support
+
+### New Contributors
+
+* @brendt made their first contribution in https://github.com/spatie/yaml-front-matter/pull/42
+
+**Full Changelog**: https://github.com/spatie/yaml-front-matter/compare/2.0.9...2.1.0
+
 ## 2.0.9 - 2024-06-13
 
 ### What's Changed
