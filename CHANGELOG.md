@@ -2,6 +2,19 @@
 
 All Notable changes to `yaml-front-matter` will be documented in this file
 
+## 2.1.1 - 2025-11-24
+
+### What's Changed
+
+* Update issue template by @AlexVanderbist in https://github.com/spatie/yaml-front-matter/pull/44
+* Added Symfony 8 support to all symfony/* packages. by @thecaliskan in https://github.com/spatie/yaml-front-matter/pull/46
+
+### New Contributors
+
+* @thecaliskan made their first contribution in https://github.com/spatie/yaml-front-matter/pull/46
+
+**Full Changelog**: https://github.com/spatie/yaml-front-matter/compare/2.1.0...2.1.1
+
 ## 2.1.0 - 2024-12-02
 
 ### What's Changed
